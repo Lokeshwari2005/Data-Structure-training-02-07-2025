@@ -1,0 +1,119 @@
+# Node class
+class Node:
+    def _init_(self, data):
+        self.data = data
+        self.next = None
+
+# LinkedList class
+class LinkedList:
+    def _init_(self):
+        self.head = None
+
+    # Append a node at the end
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+
+    # Insert at beginning
+    def insert_at_beginning(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    # Insert at specific position (1-based indexing)
+    def insert_at_position(self, data, position):
+        new_node = Node(data)
+        if position <= 1:
+            self.insert_at_beginning(data)
+            return
+        current = self.head
+        count = 1
+        while current and count < position - 1:
+            current = current.next
+            count += 1
+        if current:
+            new_node.next = current.next
+            current.next = new_node
+
+    # Delete a node by value
+    def delete(self, value):
+        current = self.head
+        prev = None
+        while current:
+            if current.data == value:
+                if prev:
+                    prev.next = current.next
+                else:
+                    self.head = current.next
+                return
+            prev = current
+            current = current.next
+
+    # Display the list
+    def display(self):
+        current = self.head
+        while current:
+            print(current.data)
+            current = current.next
+
+    # Search for a node and return its position (1-based index)
+    def search(self, value):
+        current = self.head
+        position = 1
+        while current:
+            if current.data == value:
+                return position
+            current = current.next
+            position += 1
+        return -1
+
+# Create list and add 5 initial nodes
+ll = LinkedList()
+ll.append("Chocolate")
+ll.append("Cake")
+ll.append("Biscuits")
+ll.append("Brownie")
+ll.append("Ice Cream")
+
+# 2. Display the list
+print("Initial List:")
+ll.display()
+
+# 3. Insert at beginning: Coffee
+ll.insert_at_beginning("Coffee")
+
+# 4. Insert at end: Chicken Briyani
+ll.append("Chicken Briyani")
+
+# 5. Insert at 3rd position: Sweets
+ll.insert_at_position("Sweets", 3)
+
+# 6. Display updated list
+print("\nList after insertions:")
+ll.display()
+
+# 7. Delete 'Coffee'
+ll.delete("Coffee")
+
+# 8. Delete 'Chicken Briyani'
+ll.delete("Chicken Briyani")
+
+# 9. Delete 'Brownie'
+ll.delete("Brownie")
+
+# 10. Display updated list
+print("\nList after deletions:")
+ll.display()
+
+# 11. Search for 'Ice Cream' and display its position
+position = ll.search("Ice Cream")
+if position != -1:
+    print(f"\n'Ice Cream' found at position: {position}")
+else:
+    print("\n'Ice Cream' not found in the list.")
