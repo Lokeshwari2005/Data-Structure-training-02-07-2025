@@ -1,0 +1,14 @@
+
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char str[]="HP,HP,lenovo,Dell";
+    int count=0;
+    char *ptr=str;
+    while((ptr = strstr(ptr,"HP")) != NULL){
+        count++;
+        ptr +=2;
+    }
+    printf("word count:%d\n",count);
+    return 0;
+}
