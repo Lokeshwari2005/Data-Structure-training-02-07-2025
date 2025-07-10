@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char brands[4][20]={"Dell","Lenovo","Asus","HP"};
+    char temp[20];
+    for (int i=0;i<4-1;i++){
+        for(int j=i+1;j<4;j++){
+            if(strcmp(brands[i],brands[j]) >0){
+                strcpy(temp,brands[i]);
+                strcpy(brands[i],brands[j]);
+                strcpy(brands[j],temp);
+            }
+        }
+    }
+    printf("sorted brands:\n");
+    for(int i=0;i<4;i++){
+        printf("%s\n",brands[i]);
+    }
+    return 0;
+} 
